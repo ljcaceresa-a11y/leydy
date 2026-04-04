@@ -1,0 +1,48 @@
+def calcular_propina(subtotal, porcentaje):
+    return subtotal * porcentaje / 100
+
+def calcular_total(subtotal, propina):
+    return subtotal + propina
+
+def dividir_cuenta(total, personas):
+    if personas <= 0:
+        return "Error"
+    return total / personas
+
+def aplicar_descuento(subtotal, descuento):
+    return subtotal - (subtotal * descuento / 100)
+
+
+while True:
+    print("\n1. Propina")
+    print("2. Dividir cuenta")
+    print("3. Descuento + propina")
+    print("4. Salir")
+
+    op = input("Opción: ")
+
+    if op == "1":
+        s = float(input("Subtotal: "))
+        p = float(input("Propina %: "))
+        prop = calcular_propina(s, p)
+        print("Total:", calcular_total(s, prop))
+
+    elif op == "2":
+        t = float(input("Total: "))
+        per = int(input("Personas: "))
+        r = dividir_cuenta(t, per)
+        print("Resultado:", r)
+
+    elif op == "3":
+        s = float(input("Subtotal: "))
+        d = float(input("Descuento %: "))
+        p = float(input("Propina %: "))
+        nuevo = aplicar_descuento(s, d)
+        prop = calcular_propina(nuevo, p)
+        print("Total final:", calcular_total(nuevo, prop))
+
+    elif op == "4":
+        break
+
+    else:
+        print("Opción inválida")
