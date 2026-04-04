@@ -1,0 +1,46 @@
+def promedio(notas):
+    suma = 0
+    for nota in notas:
+        suma += nota
+    return suma / len(notas)
+
+
+def mayor(notas):
+    maximo = notas[0]
+    for nota in notas:
+        if nota > maximo:
+            maximo = nota
+    return maximo
+
+
+def menor(notas):
+    minimo = notas[0]
+    for nota in notas:
+        if nota < minimo:
+            minimo = nota
+    return minimo
+
+
+def contar_aprobados(notas, minimo=61):
+    contador = 0
+    for nota in notas:
+        if nota >= minimo:
+            contador += 1
+    return contador
+
+
+def reporte(notas):
+    print("📊 REPORTE DE NOTAS")
+    print("Notas:", notas)
+    print("Promedio:", promedio(notas))
+    print("Mayor:", mayor(notas))
+    print("Menor:", menor(notas))
+    print("Aprobados:", contar_aprobados(notas))
+
+
+# BONUS
+def histograma(notas):
+    print("\n📈 Histograma:")
+    for nota in notas:
+        estrellas = "*" * (nota // 5)  # escala simple
+        print(f"{nota}: {estrellas}")
