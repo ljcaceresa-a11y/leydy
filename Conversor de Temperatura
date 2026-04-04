@@ -1,0 +1,34 @@
+def celsius_a_fahrenheit(c):
+    return (c * 9/5) + 32
+
+def fahrenheit_a_celsius(f):
+    return (f - 32) * 5/9
+
+def celsius_a_kelvin(c):
+    return c + 273.15
+
+def convertir(valor, origen, destino):
+    origen = origen.upper()
+    destino = destino.upper()
+
+    # Convertir todo primero a Celsius
+    if origen == "C":
+        c = valor
+    elif origen == "F":
+        c = fahrenheit_a_celsius(valor)
+    elif origen == "K":
+        c = valor - 273.15
+    else:
+        print("Escala de origen inválida")
+        return None
+
+    # Convertir de Celsius a destino
+    if destino == "C":
+        return c
+    elif destino == "F":
+        return celsius_a_fahrenheit(c)
+    elif destino == "K":
+        return celsius_a_kelvin(c)
+    else:
+        print("Escala de destino inválida")
+        return None
