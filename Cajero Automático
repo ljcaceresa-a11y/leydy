@@ -1,0 +1,16 @@
+def calcular_billetes(monto):
+    if monto % 5 != 0:
+        print("Error: el monto debe ser múltiplo de 5")
+        return None
+
+    billetes = [200, 100, 50, 20]
+    resultado = {}
+
+    for b in billetes:
+        cantidad = monto // b
+        resultado[b] = cantidad
+        monto %= b
+
+    for b in billetes:
+        if resultado[b] > 0:
+            print(f"{resultado[b]}x Q{b}", end=", ")
