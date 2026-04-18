@@ -1,0 +1,51 @@
+# 1. Crear un diccionario con información personal
+def crear_diccionario():
+    persona = {
+        "nombre": "leydy",
+        "edad": 18,
+        "ciudad": "Guatemala",
+    }
+    return persona
+
+# 2. Agregar una nueva clave 'universidad'
+def agregar_universidad(diccionario, universidad):
+    diccionario["universidad"] = universidad
+
+# 3. Modificar el valor de 'edad'
+def modificar_edad(diccionario, nueva_edad):
+    if isinstance(nueva_edad, int) and nueva_edad > 0:
+        diccionario["edad"] = nueva_edad
+    else:
+        print("Edad inválida")
+
+# 4. Iterar con items() e imprimir cada par
+def imprimir_diccionario(diccionario):
+    for clave, valor in diccionario.items():
+        print(f"{clave}: {valor}")
+
+# 5. Verificar si 'email' existe con 'in'
+def verificar_email(diccionario):
+    if "email" in diccionario:
+        print("El email existe:", diccionario["email"])
+    else:
+        print("El email no está en el diccionario")
+
+# 6. Usar .get() para acceder a 'telefono' sin error
+def obtener_telefono(diccionario):
+    telefono = diccionario.get("telefono", "No disponible")
+    print("Teléfono:", telefono)
+
+
+# Programa principal
+persona = crear_diccionario()
+agregar_universidad(persona, "Universidad san pablo de guatemala")
+modificar_edad(persona, 18)
+
+print("\n--- Datos de la persona ---")
+imprimir_diccionario(persona)
+
+print("\n--- Verificación de email ---")
+verificar_email(persona)
+
+print("\n--- Obtener teléfono ---")
+obtener_telefono(persona)
