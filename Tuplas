@@ -1,0 +1,40 @@
+# 1. Crear una tupla con las coordenadas de tu ciudad
+coordenadas = (14.6349, -90.5069)  # Ejemplo: Ciudad de Guatemala
+
+# 2. Desempaquetar en variables lat, lon
+lat, lon = coordenadas
+print("Latitud:", lat)
+print("Longitud:", lon)
+
+
+# 3. Función que retorna (min, max, promedio) de una lista de números
+def estadisticas(numeros):
+    minimo = min(numeros)
+    maximo = max(numeros)
+    promedio = sum(numeros) / len(numeros)
+    return (minimo, maximo, promedio)
+
+# Prueba de la función
+lista = [10, 20, 30, 40, 50]
+resultado = estadisticas(lista)
+print("\nEstadísticas (min, max, promedio):", resultado)
+
+
+# 4. Usar tuplas como claves de un diccionario
+distancias = {
+    ("Guate", "Escuintla"): 58,
+    ("Guate", "Antigua"): 45
+}
+
+print("\nDistancias:")
+for ruta, km in distancias.items():
+    print(f"{ruta}: {km} km")
+
+
+# 5. Intentar modificar un elemento de la tupla
+try:
+    coordenadas[0] = 15.0
+except TypeError as e:
+    print("\nError al modificar la tupla:", e)
+    # Las tuplas son inmutables, lo que significa que no se pueden modificar
+    # después de haber sido creadas.
