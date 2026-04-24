@@ -1,0 +1,83 @@
+def agregar_contacto(agenda):
+    nombre = input("Nombre: ").strip()
+    
+    if not nombre:
+        print("❌ El nombre no puede estar vacío")
+        return
+    
+    telefono = input("Teléfono: ")
+    email = input("Email: ")
+
+    contacto = {
+        "nombre": nombre,
+        "telefono": telefono,
+        "email": email
+    }
+
+    agenda.append(contacto)
+    print("✅ Contacto agregado")
+
+
+def buscar_contacto(agenda):
+    nombre = input("Nombre a buscar: ").strip()
+    
+    for contacto in agenda:
+        if contacto.get("nombre").lower() == nombre.lower():
+            print("📌 Encontrado:")
+            print(contacto)
+            return
+    
+    print("❌ Contacto no encontrado")
+
+
+def mostrar_contactos(agenda):
+    if not agenda:
+        print("📭 Agenda vacía")
+        return
+    
+    for i, contacto in enumerate(agenda, 1):
+        print(f"{i}. {contacto}")
+
+
+def eliminar_contacto(agenda):
+    nombre = input("Nombre a eliminar: ").strip()
+
+    for contacto in agenda:
+        if contacto.get("nombre").lower() == nombre.lower():
+            agenda.remove(contacto)
+            print("🗑️ Contacto eliminado")
+            return
+    
+    print("❌ No se encontró el contacto")
+
+
+def menu():
+    agenda = []
+
+    while True:
+        print("\n--- AGENDA ---")
+        print("1. Agregar contacto")
+        print("2. Buscar contacto")
+        print("3. Mostrar contactos")
+        print("4. Eliminar contacto")
+        print("5. Salir")
+
+        opcion = input("Elige una opción: ")
+
+        if opcion == "1":
+            agregar_contacto(agenda)
+        elif opcion == "2":
+            buscar_contacto(agenda)
+        elif opcion == "3":
+            mostrar_contactos(agenda)
+        elif opcion == "4":
+            eliminar_contacto(agenda)
+        elif opcion == "5":
+            print("👋 Saliendo...")
+            break
+        else:
+            print("❌ Opción inválida")
+
+
+# Ejecutar
+menu()
