@@ -1,0 +1,79 @@
+import json
+
+# 1. JSON string con catálogo de cursos
+json_cursos = '''
+[
+    {
+        "nombre": "Programación I",
+        "codigo": "CS101",
+        "creditos": 4,
+        "horario": "Lunes 8-10",
+        "prerequisitos": []
+    },
+    {
+        "nombre": "Estructuras de Datos",
+        "codigo": "CS201",
+        "creditos": 5,
+        "horario": "Martes 10-12",
+        "prerequisitos": ["CS101"]
+    },
+    {
+        "nombre": "Bases de Datos",
+        "codigo": "CS301",
+        "creditos": 3,
+        "horario": "Miércoles 14-16",
+        "prerequisitos": ["CS201"]
+    }
+]
+'''
+
+# 2. Parsear JSON
+cursos = json.loads(json_cursos)
+
+# 3. Imprimir cursos con más de 3 créditos
+print("📚 Cursos con más de 3 créditos:")
+for curso in cursos:
+    if curso.get("creditos", 0) > 3:
+        print(curso)
+
+# 4. Buscar curso por código
+def buscar_curso(cursos, codigo):
+    for curso in cursos:
+        if curso.get("codigo") == codigo:
+            return curso
+    return None
+
+codigo_buscar = input("\nIngresa código a buscar: ")
+resultado = buscar_curso(cursos, codigo_buscar)
+
+if resultado:
+    print("🔍 Curso encontrado:", resultado)
+else:
+    print("❌ No encontrado")
+
+# 5. Modificar horario de un curso
+codigo_mod = input("\nCódigo del curso a modificar: ")
+nuevo_horario = input("Nuevo horario: ")
+
+for curso in cursos:
+    if curso.get("codigo") == codigo_mod:
+        curso["horario"] = nuevo_horario
+        print("✅ Horario actualizado")
+        break
+else:
+    print("❌ Curso no encontrado")
+
+# 6. Convertir de vuelta a JSON
+json_actualizado = json.dumps(cursos, indent=4)
+print("\n📄 JSON actualizado:")
+print(json_actualizado)
+
+
+# BONUS: función que recibe código y retorna curso
+def obtener_curso_por_codigo(cursos, codigo):
+    return next((c for c in cursos if c.get("codigo") == codigo), None)
+
+
+# Prueba bonus
+print("\n🎯 BONUS:")
+print(obtener_curso_por_codigo(cursos, "CS201"))
