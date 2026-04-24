@@ -1,0 +1,114 @@
+def agregar_producto(inventario):
+    nombre = input("Nombre del producto: ").strip()
+    
+    if not nombre:
+        print("❌ Nombre inválido")
+        return
+    
+    precio = float(input("Precio: "))
+    cantidad = int(input("Cantidad: "))
+    categoria = input("Categoría: ")
+
+    producto = {
+        "nombre": nombre,
+        "precio": precio,
+        "cantidad": cantidad,
+        "categoria": categoria
+    }
+
+    inventario.append(producto)
+    print("✅ Producto agregado")
+
+
+def buscar_producto(inventario):
+    termino = input("Buscar por nombre o categoría: ").lower()
+
+    resultados = [
+        p for p in inventario
+        if termino in p.get("nombre").lower() or termino in p.get("categoria").lower()
+    ]
+
+    if resultados:
+        for p in resultados:
+            print(p)
+    else:
+        print("❌ No se encontraron resultados")
+
+
+def actualizar_cantidad(inventario):
+    nombre = input("Producto: ").lower()
+
+    for p in inventario:
+        if p.get("nombre").lower() == nombre:
+            tipo = input("¿Venta o restock? (v/r): ").lower()
+            cantidad = int(input("Cantidad: "))
+
+            if tipo == "v":
+                p["cantidad"] -= cantidad
+            elif tipo == "r":
+                p["cantidad"] += cantidad
+
+            print("✅ Cantidad actualizada")
+            return
+
+    print("❌ Producto no encontrado")
+
+
+def valor_total(inventario):
+    total = sum(p["precio"] * p["cantidad"] for p in inventario)
+    print(f"💰 Valor total: {total}")
+
+
+def stock_bajo(inventario):
+    bajos = [p for p in inventario if p["cantidad"] < 5]
+
+    if bajos:
+        print("⚠️ Productos con stock bajo:")
+        for p in bajos:
+            print(p)
+    else:
+        print("✅ No hay productos con stock bajo")
+
+
+def exportar_json(inventario):
+    json_data = json.dumps(inventario, indent=4)
+    print("📄 Inventario en JSON:")
+    print(json_data)
+
+
+def menu():
+    inventario = []
+
+    while True:
+        print("\n--- INVENTARIO ---")
+        print("1. Agregar producto")
+        print("2. Buscar producto")
+        print("3. Actualizar cantidad")
+        print("4. Valor total")
+        print("5. Stock bajo")
+        print("6. Exportar JSON")
+        print("7. Salir")
+
+        opcion = input("Elige una opción: ")
+
+        if opcion == "1":
+            agregar_producto(inventario)
+        elif opcion == "2":
+            buscar_producto(inventario)
+        elif opcion == "3":
+            actualizar_cantidad(inventario)
+        elif opcion == "4":
+            valor_total(inventario)
+        elif opcion == "5":
+            stock_bajo(inventario)
+        elif opcion == "6":
+            exportar_json(inventario)
+        elif opcion == "7":
+            print("👋 Saliendo...")
+            break
+        else:
+            print("❌ Opción inválida")
+
+
+# Ejecutar
+menu()
